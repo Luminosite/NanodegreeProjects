@@ -12525,8 +12525,7 @@ Testing set has 9045 samples.
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Metrics-and-the-Naive-Predictor">Metrics and the Naive Predictor<a class="anchor-link" href="#Metrics-and-the-Naive-Predictor">&#182;</a></h3><p><em>CharityML</em>, equipped with their research, knows individuals that make more than \$50,000 are most likely to donate to their charity. Because of this, *CharityML* is particularly interested in predicting who makes more than \$50,000 accurately. It would seem that using <strong>accuracy</strong> as a metric for evaluating a particular model's performace would be appropriate. Additionally, identifying someone that <em>does not</em> make more than \$50,000 as someone who does would be detrimental to *CharityML*, since they are looking to find individuals willing to donate. Therefore, a model's ability to precisely predict those that make more than \$50,000 is <em>more important</em> than the model's ability to <strong>recall</strong> those individuals. We can use <strong>F-beta score</strong> as a metric that considers both precision and recall:</p>
-<p>$$ F_{\beta} = (1 + \beta^2) \cdot \frac{precision \cdot recall}{\left( \beta^2 \cdot precision \right) + recall} $$</p>
-<p>In particular, when $\beta = 0.5$, more emphasis is placed on precision. This is called the <strong>F$_{0.5}$ score</strong> (or F-score for simplicity).</p>
+$$ F_{\beta} = (1 + \beta^2) \cdot \frac{precision \cdot recall}{\left( \beta^2 \cdot precision \right) + recall} $$<p>In particular, when $\beta = 0.5$, more emphasis is placed on precision. This is called the <strong>F$_{0.5}$ score</strong> (or F-score for simplicity).</p>
 <p>Looking at the distribution of classes (those who make at most \$50,000, and those who make more), it's clear most individuals do not make more than \$50,000. This can greatly affect <strong>accuracy</strong>, since we could simply say <em>"this person does not make more than \$50,000"</em> and generally be right, without ever looking at the data! Making such a statement would be called <strong>naive</strong>, since we have not considered any information to substantiate the claim. It is always important to consider the <em>naive prediction</em> for your data, to help establish a benchmark for whether a model is performing well. That been said, using that prediction would be pointless: If we predicted all people made less than \$50,000, <em>CharityML</em> would identify no one as donors.</p>
 <h4 id="Note:-Recap-of-accuracy,-precision,-recall">Note: Recap of accuracy, precision, recall<a class="anchor-link" href="#Note:-Recap-of-accuracy,-precision,-recall">&#182;</a></h4><p><strong> Accuracy </strong> measures how often the classifier makes the correct prediction. It’s the ratio of the number of correct predictions to the total number of predictions (the number of test data points).</p>
 <p><strong> Precision </strong> tells us what proportion of messages we classified as spam, actually were spam.
@@ -12650,24 +12649,24 @@ It is a ratio of true positives(words classified as spam, and which are actually
 <p><strong>Answer: </strong></p>
 <p>SVM:</p>
 <ul>
-<li>Usage: Faces detect in picture.</li>
-<li>Strengths: It's accurate, fast to train.</li>
-<li>Weakness: Suitable for small set of features, and not good at sparse data. </li>
-<li>Reason: The target is to separate the data to two kinds, svm is suitable. Although, SVM is not good at large dimension data, I think around 100 columns is still acceptable, and SVM is a classifier with high accuracy, I want to try it. </li>
+<li>用途: 图片面部识别.</li>
+<li>有点: 精准，训练速度快，所需数据量相对较少.</li>
+<li>缺点: 不适用于较多特征的情况，不适用于稀疏数据. </li>
+<li>理由: 二分分类，适于用SVM. 100多列的数据对SVM应该不算太多，且算法准确率高，值得一试。 </li>
 </ul>
 <p>Ensamble Methods:</p>
 <ul>
-<li>Usage: Fraud detection. Detect frauders according to attributes of accounts</li>
-<li>Strengths: They are robust to outliers, scalable, and able to naturally model non-linear decision boundaries thanks to their hierarchical structure.</li>
-<li>Weakness: Unconstrained, individual trees are prone to overfitting, but this can be alleviated by ensemble methods.</li>
-<li>Reason: similar reason as using decision trees, and ensamble methods performe better.</li>
+<li>用途: 欺诈检测，银行里根据用户属性检测欺诈用户</li>
+<li>有点: 健壮性好，由于其分层级的结构，对异常值容忍度高，可扩展，可以产生非线性的分类边界</li>
+<li>缺点: 底层的决策树容易过拟合，但集成模型可以一定程度改善过拟合情况.</li>
+<li>理由: 便于做非线性边界的分类，而且数据中离散值多，适用于决策时。且集成方法比决策树的准确度更高。</li>
 </ul>
 <p>Stochastic Gradient Descent Classifier (SGDC):</p>
 <ul>
-<li>Usage: Fraud detection.</li>
-<li>Strengths: The learning can be much faster with stochastic gradient descent for very large training datasets and often you only need a small number of passes through the dataset to reach a good or good enough set of coefficients</li>
-<li>Weakness: like other networks, SGDC is not good at dealing with category data.</li>
-<li>Reason: data to classify have many columns, and some </li>
+<li>用途: 欺诈检测</li>
+<li>有点: 数据量大时训练速度快，在全数据集上训练的迭代次数较少</li>
+<li>缺点: 不适合处理分类型的数据.</li>
+<li>理由: 训练速度快，适用于列数较多的情况。</li>
 </ul>
 
 </div>
@@ -12941,11 +12940,12 @@ Look at the graph at the bottom left from the cell above(the visualization creat
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>I think RandomForestClassifier is the most appropriate model.</p>
+<p>随机森林</p>
 <ul>
-<li>Accuracy scores and F scores are almost same for the three models when all training data is used.</li>
-<li>RandomForestClassifier's prediction and training time is higher then SGDClassifier, and less then SVM. But it's not very different from the time cost for SGDClassifier, and it's much lesser then the time cost for SVM. So, it's acceptable.</li>
-<li>There're many category columns in data set, RandomForestClassifier consists of Decision Tree, which is suitable for this kind of data. Also, RandomForestClassifier increase performance of single Decision Tree, and is suitable for outliers.</li>
+<li>Accuracy scores和F scores基本一样（100%数据集）.</li>
+<li>随机森林训练时间排第二。但它的用时比最少的SGDC略多一点，而比SVM少很多。用时上随机森林在接受范围内</li>
+<li>数据集中有大量分类型的数据，随机森林对这样的数据处理效果最好，且对异常点的处理更好。</li>
+<li>且在数据量较少情况下随机森林效果明显好于SGDC，而SVM用时又太多，所以随机森林更合适</li>
 </ul>
 
 </div>
@@ -12969,9 +12969,9 @@ Look at the graph at the bottom left from the cell above(the visualization creat
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>RandomForestClassifier is based on Decision Tree.</p>
-<p>Decision Tree will scan the columns and select one, by which we can separate the data best. Then the algorithm will repeat same operation for each separated part. By this way, it will build a tree, and at each node of the tree, the algorithm will separate the data according the column it chosen at that node. In the end, the tree will separate the data properly.</p>
-<p>RandomForestClassifier will build many Decision Trees to classify data. To improve performance, RandomForestClassifier will decide the data's category by voting of all the trees.</p>
+<p>随机森林基于决策树.</p>
+<p>决策树会先扫描所有列，找到能将数据划分的最好的列，按该列对数据进行划分。之后对划分好的每部分数据重复这一过程。直到划分后每部分数据都只属于同一类别，或达到决策树迭代上限。把每次迭代的分类依据按分类过程组成树结构，便是决策树。将数据按照决策树，从根节点到叶子结点进行划分，最后就能得到该数据的划分列别。</p>
+<p>随机森林会构建多颗决策树，为了提高分类效果，随机森林会让每棵树对数据分类，最终用投票的方法决定最终类别。</p>
 
 </div>
 </div>
@@ -13248,8 +13248,7 @@ Final F-score on the testing data: 0.7169
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>Optimized results are better than unoptimized model.
-And the results are much better than benchmarks</p>
+<p>优化后的模型比优化前的要好，且结果也好于基准。</p>
 
 </div>
 </div>
@@ -13279,10 +13278,10 @@ And the results are much better than benchmarks</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Desc order for top 5: workclass, hours-per-week, education_level, education-num, sex</p>
-<p>workclass decides the salary level, hours-per-week decide work time which related salary amount, so I think they're the most important feature.</p>
-<p>Education could affect the work class, people with better education usually get better job, so I think it's important too.</p>
-<p>Finally I think sex will also affect income, because some women stay at home.</p>
+<p>前五（由高到低）: workclass, hours-per-week, education_level, education-num, sex</p>
+<p>workclass决定了薪水等级的高低, hours-per-week 影响每周总收入，所以最重要.</p>
+<p>教育相关的两个特征会影响工作的类别，有好教育的人能找到好工作，收入也高，所以也重要。</p>
+<p>性别也会影响工作内容，所以对收入的影响也会有一些。</p>
 
 </div>
 </div>
@@ -13367,13 +13366,13 @@ And the results are much better than benchmarks</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>My guess only matches educaiton-num.</p>
-<p>For matched feature: education is related to income, people with better educaiton can get better job. Also, as the capital-gain is also important feature, I guess well educated people is better at capital management, and could get more capital-gain.</p>
-<p>For unmatched feature:</p>
+<p>只猜中了 educaiton-num.</p>
+<p>对猜中的特征：教育程度与收入相关，有良好教育的人能找到更好的工作，所以年收入也会变高。</p>
+<p>没猜中的特征:</p>
 <ol>
-<li>capital-gain: it's part of income, and from the order of important features, I guess the capital-gain take a big part of income, so it's important.</li>
-<li>age: this feature is related to working seniority, and income will increase with the increase of work seniority, so it makes sense that this feature is important.</li>
-<li>marrage: I guess the marrige information is also related to the person's age and working seniority, so it's important</li>
+<li>capital-gain: 这是总收入的一部分，也侧面反映了每个人能投入的投资数量。投资资金越多，说明资产越多，也说明这个人的收入也比较多。</li>
+<li>age: 这个特征可以反映工作年限，年限越久，工作经验就越多，职位可能就越高，因而薪水越多，能够有更多收入</li>
+<li>marrage: 我认为婚姻状况一定程度上能反映出人的年龄，因而和年龄起到类似的作用。</li>
 </ol>
 
 </div>
@@ -13464,8 +13463,8 @@ F-score on testing data: 0.6927
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ul>
-<li>Model with reduced data is weaker than the original one. But the scores for unoptimized model are 0.8401 and 0.6775, so, it's still better than the unoptimized model.</li>
-<li>Yes. And it will also affect the model selection, I think. In the model selection process, we consider the model train time, and feature number, if we reduce feature number at that time, we could choose model more suitable for less features and model with more accuracy, like SVM.</li>
+<li>新模型比原有的效果差. 但仍好于未优化的模型。</li>
+<li>会的。这也会影响模型选择。我们选模型时会考虑训练和预测耗时，但列数较少，有些模型的耗时会改变。例如SVM。如果减少列数，这样的数据会更适合于SVM，其耗时也会大大较少，因而我们可以考虑试用SVM以获取更好的预测效果。</li>
 </ul>
 
 </div>
@@ -13481,6 +13480,19 @@ F-score on testing data: 0.6927
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
     </div>
   </div>

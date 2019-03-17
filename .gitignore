@@ -1,2 +1,4 @@
 *.py[c]
 */__*
+.DS_Store
+**/data/
